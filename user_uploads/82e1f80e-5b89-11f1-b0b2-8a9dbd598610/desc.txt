@@ -1,0 +1,1 @@
+These images were used in my CFD Assignment. We tried to reproduce a scientific research paper on our own after learning the basics of CFD Schemes and maths behind them.
