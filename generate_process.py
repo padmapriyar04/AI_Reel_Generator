@@ -44,10 +44,10 @@ if __name__ == "__main__":
     print("done_folders:",done_folders)
     print("all_folders:",user_uploads)
     for folder in user_uploads:
-        if folder in done_folders:
+        if folder not in done_folders:
             text_to_audio(folder)
             generate_reel(folder)
-            # with open("done.txt","a") as f:
-            #     f.write(folder +'\n')
+            with open("done.txt","a") as f:
+                f.write(folder +'\n')
         
     
