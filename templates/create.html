@@ -12,11 +12,12 @@
             <h1 class="upload-title">Create Your Reel</h1>
             <p class="upload-instructions">Upload your video files to create an amazing reel. You can upload multiple files.</p>
             
-            <form action="/create" method="post" class="dropzone" id="myDropzone">
+            <form action="/create" method="post" class="dropzone" id="myDropzone" enctype="multipart/form-data">
                 <div class="fallback">
                     <div id="fileInputs">
                         <div class="file-input-group">
                             <input name="file1" type="file" class="file-input" />
+                            <input name="uuid" type="hidden" value="{{myid}}"/>
                             <button type="button" class="remove-file-btn" onclick="removeFileInput(this)" disabled>×</button>
                         </div>
                     </div>
@@ -34,3 +35,26 @@
     </div>
 </section>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    let fileCounter = 2; // Start from 2 since we already have file1
+
+    function addFileInput() {
+        const fileInputs = document.getElementById('fileInputs');
+        const newFileInput = document.createElement('div');
+        newFileInput.className = 'file-input-group';
+        newFileInput.innerHTML = `
+            <input name="file${fileCounter}" type="file" class="file-input" />
+            <button type="button" class="remove-file-btn" onclick="removeFileInput(this)">×</button>
+        `;
+        fileInputs.appendChild(newFileInput);
+        fileCounter++;
+    }
+
+    function removeFileInput(button) {
+        const fileInputGroup = button.parentElement;
+        fileInputGroup.remove();
+    }
+</script>
+{% endblock %} 
